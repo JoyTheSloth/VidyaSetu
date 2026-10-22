@@ -251,14 +251,18 @@ export const HomePage: React.FC<HomePageProps> = ({ onGoToPortal }) => {
             {/* Right Action Bar: Theme toggle + Vidyasetu Portal Button + Mobile Hamburger Menu */}
             <div className="flex items-center gap-1.5 xs:gap-2 sm:gap-3 shrink-0">
               
-              {/* Theme toggle - Hidden on extra small phones to maximize Vidyasetu & Menu space, visible from xs+ */}
+              {/* Theme toggle - Circular pill button visible on all devices */}
               <button
                 onClick={toggleTheme}
                 aria-label="Toggle color theme"
-                className="hidden xs:flex p-1.5 sm:p-2 rounded-xl text-slate-600 dark:text-amber-300 hover:bg-slate-100 dark:hover:bg-white/10 border border-slate-200 dark:border-white/15 transition-all duration-200 active:scale-90 hover:rotate-12 cursor-pointer shadow-2xs items-center justify-center shrink-0"
+                className="flex w-9 h-9 sm:w-10 sm:h-10 rounded-full text-slate-600 dark:text-amber-300 bg-slate-100/80 hover:bg-slate-200/80 dark:bg-white/10 dark:hover:bg-white/20 border border-slate-200/90 dark:border-white/15 transition-all duration-200 active:scale-90 cursor-pointer shadow-2xs items-center justify-center shrink-0"
                 title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} theme`}
               >
-                {theme === 'dark' ? <Sun className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-300 transition-transform duration-300" /> : <Moon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-600 transition-transform duration-300" />}
+                {theme === 'dark' ? (
+                  <Sun className="w-4 h-4 text-amber-300 transition-transform duration-300" />
+                ) : (
+                  <Moon className="w-4 h-4 text-slate-700 transition-transform duration-300" />
+                )}
               </button>
 
               {/* Vidyasetu Portal Button - Fully compact, unbreakable text & responsive icon */}
@@ -372,8 +376,29 @@ export const HomePage: React.FC<HomePageProps> = ({ onGoToPortal }) => {
                 ))}
               </div>
 
+              {/* Dark/Light mode switcher inside drawer */}
+              <div className="pt-2 pb-1 border-t border-slate-100 dark:border-white/10 flex items-center justify-between px-1">
+                <span className="text-xs font-bold text-slate-700 dark:text-slate-200">Appearance</span>
+                <button
+                  onClick={toggleTheme}
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold bg-slate-100 dark:bg-white/10 text-slate-800 dark:text-amber-300 border border-slate-200 dark:border-white/15"
+                >
+                  {theme === 'dark' ? (
+                    <>
+                      <Sun className="w-3.5 h-3.5 text-amber-300" />
+                      <span>Light Mode</span>
+                    </>
+                  ) : (
+                    <>
+                      <Moon className="w-3.5 h-3.5 text-slate-700" />
+                      <span>Dark Mode</span>
+                    </>
+                  )}
+                </button>
+              </div>
+
               {/* Portal Quick Access Button inside modal */}
-              <div className="pt-2 border-t border-slate-100 dark:border-white/10">
+              <div className="pt-2">
                 <button
                   onClick={() => {
                     setIsMobileNavOpen(false);
@@ -556,17 +581,17 @@ export const HomePage: React.FC<HomePageProps> = ({ onGoToPortal }) => {
               </button>
             </motion.div>
 
-            {/* Phone UI: Full-bleed Campus Cutout Image touching the screen borders & enlarged */}
+            {/* Phone UI: Full-bleed Edge-to-Edge Enlarged Campus Cutout Image */}
             <motion.div 
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.35 }}
-              className="lg:hidden -mx-4 sm:-mx-6 w-[calc(100%+2rem)] sm:w-[calc(100%+3rem)] pt-3 pb-1 flex items-center justify-center pointer-events-none select-none overflow-hidden"
+              className="lg:hidden -mx-4 sm:-mx-6 w-[calc(100%+2rem)] sm:w-[calc(100%+3rem)] pt-3 pb-1 flex items-center justify-center pointer-events-none select-none overflow-visible"
             >
               <img 
-                src="/assets/campus_cutout.png" 
-                alt="Vidyasetu Bhaktivedanta Institute Main Campus" 
-                className="w-full h-auto object-cover object-bottom transform scale-115 xs:scale-120 origin-bottom drop-shadow-[0_14px_28px_rgba(0,43,102,0.25)] dark:drop-shadow-[0_14px_28px_rgba(0,0,0,0.65)]"
+                src="/assets/Bhaktivedanta%20School%20Building%20Cutout.png" 
+                alt="Bhaktivedanta Institute Mission Hr. Sec. School Campus" 
+                className="w-full h-auto object-contain transform scale-108 sm:scale-110 origin-center drop-shadow-[0_14px_28px_rgba(0,43,102,0.25)] dark:drop-shadow-[0_14px_28px_rgba(0,0,0,0.65)]"
               />
             </motion.div>
 
